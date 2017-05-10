@@ -1,0 +1,19 @@
+{
+  "name": "AtlasCamp Example Power-Up",
+  "details":"A Power-Up to demonstrate all of the things you can do with Power-Ups!",
+  "icon": {
+    "url": "https://cdn.glitch.com/20639433-3197-46bd-a2d1-2afa7367288a%2Ftaco.png"
+  },
+  "author": "Trello, Inc.",
+  "capabilities": [
+    "callback",
+    "attachment-sections",
+    "attachment-thumbnails",
+    "card-buttons"
+  ],
+  "connectors": {
+    "iframe": {
+      "url": "./index.html"
+    }
+  }
+}

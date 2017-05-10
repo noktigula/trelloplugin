@@ -1,12 +1,7 @@
-// server.js
-// where your node app starts
-
-// init project
 var express = require('express');
 var app = express();
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+var utils = require('./utils');
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -16,9 +11,15 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/dreams", function (request, response) {
-  response.send(dreams);
+app.get("/auth", function (request, response) {
+  response.send({
+    userId: "784",
+    token: utils.fakeUuid(),
+  });
 });
+
+
+
 
 // could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
 app.post("/dreams", function (request, response) {
