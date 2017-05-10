@@ -11,28 +11,42 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+
+/* 
+    Server Code 
+    ------ ----
+    
+    All of the code above this line is responsible for hosting
+    our Power-Up. The code below is used to represent our fake
+    service. In a real-world scenario, you will likely want to 
+    have these seperated and your server code should probably
+    do something a little more exciting then ours does 😁
+*/
+
+// Our Fake Auth Endpoint
 app.get("/auth", function (request, response) {
+  // We'll always pretend like the credentials sent in the reques
+  // are valid.
   response.send({
     userId: "784",
     token: utils.fakeUuid(),
   });
 });
 
+app.get("/datas", function (request, response) {
+  // Check to make sure that we've received a valid access token.
+  
+  // Also check to make sure there is a valid campaign.
 
-
-
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
-  response.sendStatus(200);
+  // Give them back some datas
+  response.send({
+    uptime: "Find and count some sheep",
+    clickRate: "Climb a really tall mountain",
+    industryAverage: "Wash the dishes",
+  });
 });
 
 // Simple in-memory store for now
-var dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
