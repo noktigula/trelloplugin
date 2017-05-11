@@ -2,62 +2,92 @@
 
 var Promise = TrelloPowerUp.Promise;
 
-var PANDA_ICON = 'https://cdn.glitch.com/0cedee99-1534-4a43-88ec-f3eafd12aa3b%2Fpanda.png?1490808908505';
-var TACO_ICON = 'https://cdn.glitch.com/20639433-3197-46bd-a2d1-2afa7367288a%2Ftaco.png?1489428197039';
+var HYPERDEV_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
+var GRAY_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
+var WHITE_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
 
-var cardButtonCallback = function(t){
-  
-  let items = [
-    {
-      text: 'Acadia',
-      url: 'http://www.nps.gov/acad'
-    }, {
-      text: 'Yellowstone',
-      url: 'http://www.nps.gov/yell'
-    }, {
-      text: 'Yosemite',
-      url: 'http://www.nps.gov/yose'
-    }, {
-      text: 'Chattanooga and Chickamauga',
-      url: 'http://www.nps.gov/chch'
-    }
-  ]
-
-  return t.popup({
-    title: 'Popup Search Example',
-    items: items,
-    search: {
-      count: 3,
-      placeholder: 'Search National Parks',
-      empty: 'No parks found'
-    }
-  });  
+var getBadges = function(t){
+  // We make a request to the data stored on the
+  // card responsible for tracking time. But you could
+  // just as easily make an async request to your servie
+  // if you want to track time there.
+  return Promise.all([
+    t.get('card', 'shared', 'estimate', 0),
+    t.get('card', 'shared', 'time', 0),
+  ]).spread(function(estimate, time){
+    var badge = `E:${estimate} T:${time}`;
+    return [{
+      title: 'Estimate and Time',
+      text: badge,
+      icon: HYPERDEV_ICON,
+      color: null
+    }];
+  });
 };
 
+var badgeCallback = function(t) {
+  return t.popup({
+    title: 'Settings',
+    url: './track-time.html',
+    height: 184
+  });
+}
 
-/*
-    🎉 Power-Up Initialization 🎉
-  Here is where we will initialize all
-  of the capabilities that we want the
-  Power-Up to use.
-*/
+var getDetailBadges = function(t) {
+  return Promise.all([
+    t.get('card', 'shared', 'estimate', 0),
+    t.get('card', 'shared', 'time', 0),
+    t.get('card', 'shared', 'version', 'Not versioned'),
+    t.get('card', 'shared', 'lastModified', 0)
+  ]).spread(function(estimate, time, version, lastModified){
+    
+    console.log(lastModified)
+    lastModified = ((lastModified == 0) ? 'N/A' : Date(lastModified))
+    
+    return [{
+      title: 'Estimate',
+      text: estimate,
+      icon: HYPERDEV_ICON,
+      color: null,
+    }, {
+      title: 'Time',
+      text: time,
+      icon: HYPERDEV_ICON,
+      color: null
+    },{
+      title: 'Version',
+      text: version,
+      icon: HYPERDEV_ICON,
+      color: null
+    },{
+      title: 'Last Modified',
+      text: lastModified,
+      icon: HYPERDEV_ICON, 
+      color: null
+    }];
+  });
+};
+
+var cardButtonCallback = function(t){
+  return t.popup({
+    title: 'Add Estimate Or Time',
+    url: './track-time.html'
+  });
+};
+
 TrelloPowerUp.initialize({
-
+  'card-badges': function(t, options){
+    return getBadges(t);
+  },
   'card-buttons': function(t, options) {
     return [{
-      icon: PANDA_ICON,
-      text: 'Link To A Page',
-      url: 'https://developers.trello.com',
-      target: 'Trello\'s Developer Site',
-    },{
-      icon: PANDA_ICON,
-      text: 'Search Parks',
-      callback: cardButtonCallback,
+      icon: GRAY_ICON,
+      text: 'Track Time',
+      callback: cardButtonCallback
     }];
   },
-  
   'card-detail-badges': function(t, options) {
-    
-  }
-  
+    return getDetailBadges(t);
+  },
+
 });
