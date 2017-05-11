@@ -2,14 +2,16 @@
 
 ## Intro
 
-*What we'll cover:*
-- Adding a custom field with capabilities.
-- Managing Custom Fields In Settings
-- Basic Power-Up Architecture and Setup
-- Authing with a third-party service. (We'll setup a fake endpoint in our Node server for this.)
+Part I: You and your team use Trello to manage developer workflow. You want to Power-Up Trello and use it to run scrum. You want each card to have a estimation score. Sometimes your teams use shirt sizes and sometimes they use fibanocci so we'll want to support both. Additionally, you want to be able to sort your backlog based on it's size.
 
-*Scenario:*
-You and your team use Trello to manage developer workflow. You want to Power-Up Trello and use it to run scrum. You want each card to have a estimation score and you But your product team has decided to start using a fancy tool.
+Part II: Your product team has decided to start using a fancy tool to prioritize initiatives. Luckily, it has an easy-to-use API and you are willing to integrate with it. We'll go over managing a integration and using it in our scoring.
+
+*What we'll cover:*
+- Basic Power-Up Architecture and Setup
+- Adding an Estimation Field With Capabilities.
+- Chaging Estimation Scoring Style In Settings. 
+- Using Trello's RESTful API For List Sorting
+- Authing With Third-Party Services (We'll setup a fake endpoint in our Node server for this.)
 
 
 ## Using A Third-Party Service

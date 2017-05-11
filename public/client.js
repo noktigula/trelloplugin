@@ -42,37 +42,7 @@ var cardButtonCallback = function(t){
   Power-Up to use.
 */
 TrelloPowerUp.initialize({
-  
-  'attachment-thumbnail': function(t, options){
-    return {
-      url: options.url,
-      title: '👉 ' + 'Hard Work Happening Here, Boss' + ' 👈' ,
-      image: {
-        url: PANDA_ICON,
-        logo: true
-      },
-      openText: 'Open Sesame'
-    };
-  },
-  
-  'attachment-sections': function(t, options){
-    // Grab all of the attachments for reddit.
-    var claimed = options.entries.filter(true);
-    if(claimed.length > 0){
-      return [{
-        claimed: claimed,
-        icon: PANDA_ICON,
-        title: 'Important Work',
-        content: {
-          type: 'iframe',
-          url: t.signUrl('./attachment-section.html'),
-          height: 306
-        }
-      }];
-    }
-    return [];
-  },
-  
+
   'card-buttons': function(t, options) {
     return [{
       icon: PANDA_ICON,
@@ -85,5 +55,9 @@ TrelloPowerUp.initialize({
       callback: cardButtonCallback,
     }];
   },
+  
+  'card-detail-badges': function(t, options) {
+    
+  }
   
 });
