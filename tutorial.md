@@ -8,6 +8,9 @@
 - Basic Power-Up Architecture and Setup
 - Authing with a third-party service. (We'll setup a fake endpoint in our Node server for this.)
 
+*Scenario:*
+You and your team use Trello to manage developer workflow. You want to Power-Up Trello and use it to run scrum. You want each card to have a estimation score and you But your product team has decided to start using a fancy tool.
+
 
 ## Using A Third-Party Service
 https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
