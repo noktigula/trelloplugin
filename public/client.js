@@ -2,9 +2,7 @@
 
 var Promise = TrelloPowerUp.Promise;
 
-var HYPERDEV_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
-var GRAY_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
-var WHITE_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
+var GREY_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
 
 var getBadges = function(t){
   // We make a request to the data stored on the
@@ -19,7 +17,7 @@ var getBadges = function(t){
     return [{
       title: 'Estimate and Time',
       text: badge,
-      icon: HYPERDEV_ICON,
+      icon: '⭐️',
       color: null
     }];
   });
@@ -47,22 +45,22 @@ var getDetailBadges = function(t) {
     return [{
       title: 'Estimate',
       text: estimate,
-      icon: HYPERDEV_ICON,
+      icon: GREY_ICON,
       color: null,
     }, {
       title: 'Time',
       text: time,
-      icon: HYPERDEV_ICON,
+      icon: GREY_ICON,
       color: null
     },{
       title: 'Version',
       text: version,
-      icon: HYPERDEV_ICON,
+      icon: GREY_ICON,
       color: null
     },{
       title: 'Last Modified',
       text: lastModified,
-      icon: HYPERDEV_ICON, 
+      icon: GREY_ICON, 
       color: null
     }];
   });
@@ -81,7 +79,7 @@ TrelloPowerUp.initialize({
   },
   'card-buttons': function(t, options) {
     return [{
-      icon: GRAY_ICON,
+      icon: GREY_ICON,
       text: 'Track Time',
       callback: cardButtonCallback
     }];
@@ -90,4 +88,26 @@ TrelloPowerUp.initialize({
     return getDetailBadges(t);
   },
 
+  'show-settings': function(t, options) {
+    return t.popup({
+      title: "Power-Up Settings",
+      url: 'settings.html',
+      height: 250
+    });
+  },
+  
+//   'authorization-status': function(t) {
+//     return new TrelloPowerUp.Promise((resolve) =>
+//       resolve({ authorized: false })
+//     )
+//   },
+  
+//   'show-authorization': function(t) {
+//     t.popup({
+//       title: 'My Auth Popup',
+//       url: 'authorize.html',
+//       height: 140,
+//     })
+//   }
+  
 });
