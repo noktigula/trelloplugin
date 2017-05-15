@@ -79,6 +79,13 @@ TrelloPowerUp.initialize({
 		return [{
 			icon: GREY_ICON,
 			text: 'Estimate Size',
+      callback: function(t) {
+        return t.popup({
+          title: "Estimation",
+          url: 'estimate.html',
+          // height: 250
+        });
+      }
 		}];
 	},
 });
