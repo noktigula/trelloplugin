@@ -73,28 +73,38 @@ var cardButtonCallback = function(t){
   });
 };
 
-TrelloPowerUp.initialize({
-  'card-badges': function(t, options){
-    return getBadges(t);
-  },
-  'card-buttons': function(t, options) {
-    return [{
-      icon: GREY_ICON,
-      text: 'Track Time',
-      callback: cardButtonCallback
-    }];
-  },
-  'card-detail-badges': function(t, options) {
-    return getDetailBadges(t);
-  },
 
-  'show-settings': function(t, options) {
-    return t.popup({
-      title: "Power-Up Settings",
-      url: 'settings.html',
-      height: 250
-    });
-  },
+TrelloPowerUp.initialize({
+	'card-buttons': function(t, options) {
+		return [{
+			icon: GREY_ICON,
+			text: 'Estimate Size',
+		}];
+	},
+});
+
+// TrelloPowerUp.initialize({
+//   'card-badges': function(t, options){
+//     return getBadges(t);
+//   },
+//   'card-buttons': function(t, options) {
+//     return [{
+//       icon: GREY_ICON,
+//       text: 'Track Time',
+//       callback: cardButtonCallback
+//     }];
+//   },
+//   'card-detail-badges': function(t, options) {
+//     return getDetailBadges(t);
+//   },
+
+//   'show-settings': function(t, options) {
+//     return t.popup({
+//       title: "Power-Up Settings",
+//       url: 'settings.html',
+//       height: 250
+//     });
+//   },
   
 //   'authorization-status': function(t) {
 //     return new TrelloPowerUp.Promise((resolve) =>
@@ -109,5 +119,4 @@ TrelloPowerUp.initialize({
 //       height: 140,
 //     })
 //   }
-  
-});
+// });
