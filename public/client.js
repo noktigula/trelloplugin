@@ -2,7 +2,7 @@
 
 var Promise = TrelloPowerUp.Promise;
 
-var GREY_ICON = 'https://d30y9cdsu7xlg0.cloudfront.net/png/80449-200.png';
+var GREY_ICON = 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2F1494960888_rocket.png?1494942876297';
 
 var getBadges = function(t){
   // We make a request to the data stored on the
@@ -83,7 +83,6 @@ TrelloPowerUp.initialize({
         return t.popup({
           title: "Estimation",
           url: 'estimate.html',
-          // height: 250
         });
       }
 		}];
