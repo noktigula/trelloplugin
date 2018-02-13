@@ -12,21 +12,7 @@ Select the Trello team you want to add the Power-Up to. Note: You need to be an 
 
 Now click the `Create new Power-Up` button. If this is your first time creating a Power-Up, you'll need to agree to a "Joint Developer Agreement" first. After you have done that, you just need to give your cool new Power-Up a name, and paste the url link into the field titled `Iframe connector URL` (the one you copied earlier).
 
-This example Power-Up makes use of the following capabilities:
-* authorization-status
-* attachment-sections
-* attachment-thumbnail
-* board-buttons
-* callback
-* card-badges
-* card-buttons
-* card-detail-badges
-* card-from-url
-* format-url
-* show-authorization
-* show-setting
-
-So make sure to turn them all on when filling out the form. You'll also need a URL for an icon. You can use the sample one we have here: [https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908](https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908).
+This Power-Up doesn't make use of any capabilities out of the box, so you'll want to turn on the capabilities you want to use. You'll also need a URL for an icon. You can use the sample one we have here: [https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908](https://cdn.glitch.com/2442c68d-7b6d-4b69-9d13-feab530aa88e%2Fglitch-icon.svg?1489773457908).
 
 Click `Save` and it's time to celebrate 🎉 🎊
 
