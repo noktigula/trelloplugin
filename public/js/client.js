@@ -7,15 +7,18 @@ var BLACK_ROCKET_ICON = 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
 	// 'card-buttons': function(t, options) {
-	// 	return [{
-    // 		icon: BLACK_ROCKET_ICON,
-	// 		text: 'Estimate Size',
-	// callback: function(t) {
-	// return t.popup({
-	// title: "Estimation",
-	// url: 'estimate.html',
-	// });
-	// }
-	// 	}];
+	// return t.set("member", "shared", "hello", "world")
+	// .then(function(){
+	// 	  return [{
+	// icon: BLACK_ROCKET_ICON,
+	// 		  text: 'Estimate Size',
+	//       callback: function(t) {
+	//         return t.popup({
+	//           title: "Estimation",
+	//           url: 'estimate.html',
+	//         });
+	//       }
+	// 	  }];
+	// })
 	// },
 });
