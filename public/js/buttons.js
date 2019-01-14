@@ -13,6 +13,7 @@ const PROGRESS = Object.freeze({
 });
 
 function createEstimationButton(trello) {
+  console.log('estimation button called');
   return trello.get('card', 'shared', 'estimate')
   .then(function(estimation) {
     return {
@@ -77,13 +78,13 @@ function createEpicButton(trello) {
 }
         
 function buttons(t, options) {
+  console.log('buttons called');
   return 
   Promise.all([
-    createEstimationButton(t), 
-    createProgressButton(t), 
-    createEpicButton(t)
+    createEstimationButton(t)
   ])
   .then(function(values) {
+    console.log('All promises were resolved!');
     console.log(values);
     return values;
   });
