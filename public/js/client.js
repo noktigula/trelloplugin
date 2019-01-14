@@ -55,22 +55,21 @@ TrelloPowerUp.initialize({
                     .then(function(estimate) {
                         total += parseFloat(estimate);
                       console.log(total);
-                      return estimate;
+                      return total;
                     })
                   );
               });
   
           var total = 0;
           return Promise.all(promises)
-          .then(estimate => {
-              total +=
-          })
           .then(total => {
               console.log(total);
-              console.log('return is ' + total);
+              console.log('return is ' + total.slice(-1)[0]);
+              var finalTotal = total.slice(-1)[0];
               return [{
                   icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
-                  text: 'Total Est: ' + total,
+                  color: 'blue',
+                  text: finalTotal,
                   condition: 'always'
               }];             
           });
