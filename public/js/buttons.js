@@ -16,6 +16,7 @@ function createEstimationButton(trello) {
   console.log('estimation button called');
   return trello.get('card', 'shared', 'estimate')
   .then(function(estimation) {
+    console.log('estimate promise resolved');
     return {
       icon: BLACK_TIMER_ICON,
       text: estimation ? 'Estimation: ' + estimation : 'Estimate time',
@@ -34,7 +35,10 @@ function isProgressStarted(progressStatus) {
 }
 
 function updateProgress(trello, progressStatus) {
+  console.log('updating progress: original = ');
+  console.log(progressStatus);
     if (isProgressStarted(progressStatus)) {
+      console.log('progressStarted, need to stop');
       var np = Object.assign({}, {
         status: PROGRESS.STOPPED,
         timeSpent: new Date.getTime() - progressStatus.startTime
@@ -42,6 +46,7 @@ function updateProgress(trello, progressStatus) {
 
       trello.set('card', 'shared', 'progressStatus', np);
     } else {
+      console.log('starting progress, need to stop');
       trello.set('card', 'shared', 'progressStatus', {
         status: PROGRESS.STARTED,
         startTime: new Date.getTime()
@@ -79,9 +84,10 @@ function createEpicButton(trello) {
         
 function buttons(t, options) {
   console.log('buttons called');
-  return 
-  Promise.all([
-    createEstimationButton(t)
+  return Promise.all([
+    createEstimationButton(t),
+    createProgressButton(t),
+    createEpicButton(t)
   ])
   .then(function(values) {
     console.log('All promises were resolved!');
