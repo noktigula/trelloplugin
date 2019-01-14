@@ -43,10 +43,10 @@ TrelloPowerUp.initialize({
     })
   },
   'board-buttons': function (t, options) {
-        t.cards('all')
+        return t.cards('all')
         .then(function (cards) {
             console.log(cards.array);
-            var total = 0;
+            //var total = 0;
             var promises = [];
             
               cards.forEach(element => {
@@ -54,19 +54,24 @@ TrelloPowerUp.initialize({
                     t.get(element.id, 'shared', 'estimate')
                     .then(function(estimate) {
                         total += parseFloat(estimate);
-                      console.log(total); 
+                      console.log(total);
+                      return estimate;
                     })
                   );
               });
   
-          Promise.all(promises).then(function() {
-            
-            console.log('return is ' + total);
-            return [{
-                icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
-                text: 'Total Est: ' + total,
-                condition: 'always'
-            }]; 
+          var 
+          Promise.all(promises).then(function(estimate) {
+            console.log('estimate is ' + estimate);
+            return total;
+          })
+          .then(total => {
+              console.log('return is ' + total);
+              return [{
+                  icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
+                  text: 'Total Est: ' + total,
+                  condition: 'always'
+              }];             
           });
       });
   }  
