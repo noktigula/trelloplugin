@@ -74,7 +74,10 @@ function createEpicButton(trello) {
       icon: FOLDER_ICON,
       text: epic == '_self_' ? 'Is Epic' : epic == '' || epic == undefined ? 'No Epic assigned' : 'Epic: ' + epic,
       callback: function(trello) {
-       // Stub 
+        return trello.popup({
+          title: "This task is...",
+          url: '../epics.html'
+        });
       }
     }
   })
