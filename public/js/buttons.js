@@ -46,7 +46,7 @@ function updateProgress(trello, progressStatus) {
 
       trello.set('card', 'shared', 'progressStatus', np);
     } else {
-      console.log('starting progress, need to stop');
+      console.log('starting progress');
       trello.set('card', 'shared', 'progressStatus', {
         status: PROGRESS.STARTED,
         startTime: new Date.getTime()
