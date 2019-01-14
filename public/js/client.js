@@ -12,19 +12,22 @@ console.log('client.js started');
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
 	'card-buttons': function(t, options){
-    console.log('card-buttons called!');
-    var estimate = t.get('card', 'shared', 'estimate')
-    var text = estimate ? 'Estimated time: ' + estimate : 'Estimate time';
+    t.get('card', 'shared', 'estimate')
+    .then(function(estimate) {
+      var text = estimate ? 'Estimated: ' + estimate : 'Estimate time';
+      
+    })
+    
     return [{
-      icon: BLACK_TIMER_ICON,
-      text: text,
-      callback: function(t){
-        return t.popup({
-          title: "Estimation",
-          url: '../estimate.html'
-        });
-      }
-    }];
+        icon: BLACK_TIMER_ICON,
+        text: 'Estimate time',
+        callback: function(t){
+          return t.popup({
+            title: "Estimation",
+            url: '../estimate.html'
+          });
+        }
+      }];
 	},
   'card-badges': function(t, options) {
       return t.get('card', 'shared', 'estimate')
@@ -34,6 +37,6 @@ TrelloPowerUp.initialize({
           color: estimate ? 'blue' : 'red',
           text: estimate ? estimate : 'No Estimation!' 
         }];
-      }
-    },  
+      })
+    }  
 });
