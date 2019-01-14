@@ -43,6 +43,7 @@ TrelloPowerUp.initialize({
     })
   },
   'board-buttons': function (t, opts) {
+        console.log('board-buttons started!!!');
         return t.cards('all')
         .then(function (cards) {
             var total = 0;
@@ -52,6 +53,9 @@ TrelloPowerUp.initialize({
                     total += estimate;
                 });
             });
+            return [{
+                text: "Total Est: " + total
+            }]          
         });
   }  
 });
