@@ -8,8 +8,21 @@
   </head>
   <body>
     <form id="epics">
-      <label for="estimateSize">Estimate:</label>
-      <input type="text" name="time" id="estimateTime"/>
+      <div>
+        <input type="radio" name="epic_type" value="" id="standalone">
+        <label for="standalone" >Standalone</label>
+      </div>
+      <div>
+        <input type="radio" name="epic_type" value="_self_" id="epic">
+        <label for="epic" >Epic</label>
+      </div>
+      <div>
+        <input type="radio" name="epic_type" value="epic" id="other_epic">
+        <label for="other_epic" >Epic</label>
+        
+        <select id="">
+      </div>
+      
       <button type="submit" class="mod-primary">Save</button>
     </form>
     <script src="./js/epics.js"></script>
