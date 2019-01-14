@@ -10,7 +10,14 @@ window.estimate.addEventListener('submit', function(event){
 });
 
 t.render(function(){
-  t.sizeTo('#estimate').done();
+  t.get('card', 'shared', 'estimate')
+  .then(function(estimate){
+    if (estimate) {
+      window.estimateTime.value = estimate;
+    }
+  }).then(function(){
+    t.sizeTo('#estimate').done();
+  })
 });
 
 
