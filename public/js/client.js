@@ -1,6 +1,4 @@
 /* global TrelloPowerUp */
-import { buttons } from 'buttons';
-
 var Promise = TrelloPowerUp.Promise;
 
 //var trello = TrelloPowerUp.iframe();
