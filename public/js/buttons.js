@@ -7,9 +7,9 @@ var CHECKMARK_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca
 var FOLDER_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Ficons8-folder-48.png?1547477063203';
 
 const PROGRESS = Object.freeze({
-  NOT_STARTED: Symbol(0),
-  STARTED: Symbol(1),
-  STOPPED: Symbol(2)
+  NOT_STARTED: 0,
+  STARTED: 1,
+  STOPPED: 2
 });
 
 function createEstimationButton(trello) {
@@ -31,7 +31,11 @@ function createEstimationButton(trello) {
 }
 
 function isProgressStarted(progressStatus) {
-   progressStatus && progressStatus.status === PROGRESS.STARTED 
+  console.log('checking progress');
+  console.log(progressStatus);
+  console.log(progressStatus.status);
+  console.log(progressStatus && progressStatus.status === PROGRESS.STARTED );
+  return progressStatus && progressStatus.status === PROGRESS.STARTED 
 }
 
 function updateProgress(trello, progressStatus) {
@@ -41,10 +45,12 @@ function updateProgress(trello, progressStatus) {
       console.log('progressStarted, need to stop');
       var np = Object.assign({}, {
         status: PROGRESS.STOPPED,
-        timeSpent: new Date.getTime() - progressStatus.startTime
+        timeSpent: Date.now() - progressStatus.startTime
       }, progressStatus);
-
+      
+      console.log(np);
       trello.set('card', 'shared', 'progressStatus', np);
+      
     } else {
       console.log('starting progress');
       var ps = {
