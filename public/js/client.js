@@ -54,7 +54,8 @@ TrelloPowerUp.initialize({
                 });
             });
             return [{
-                text: "Total Est: " + total
+                text: "Total Est: " + total,
+                condition: always
             }]          
         });
   }  
