@@ -45,31 +45,24 @@ TrelloPowerUp.initialize({
   'board-buttons': function (t, options) {
         return t.cards('all')
         .then(function (cards) {
-            console.log(cards.array);
-            var total = 0;
             var promises = [];
             
               cards.forEach(element => {
                   promises.push(
                     t.get(element.id, 'shared', 'estimate')
                     .then(function(estimate) {
-                        total += parseFloat(estimate);
-                      console.log(total);
-                      return total;
+                      return estimate;
                     })
                   );
               });
   
-          var total = 0;
           return Promise.all(promises)
-          .then(total => {
-              console.log(total);
-              console.log('return is ' + total.slice(-1)[0]);
-              var finalTotal = total.slice(-1)[0];
+          .then(estimations => {
+              var total = estimations.reduce((x, y) => parseFloat(x) + parseFloat(y), 0);
               return [{
                   icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
                   color: 'blue',
-                  text: finalTotal,
+                  text: total,
                   condition: 'always'
               }];             
           });
