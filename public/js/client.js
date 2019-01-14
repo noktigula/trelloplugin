@@ -60,9 +60,10 @@ TrelloPowerUp.initialize({
               });
   
           Promise.all(promises).then(function() {
+            
             console.log('return is ' + total);
             return [{
-                //icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
+                icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
                 text: 'Total Est: ' + total,
                 condition: 'always'
             }]; 
