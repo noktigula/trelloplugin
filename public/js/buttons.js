@@ -4,6 +4,8 @@ var WHITE_TIMER_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403b
 var WIP_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Ficons8-construction-96.png?1547475713477';
 var CHECKMARK_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Ficons8-checkmark-96.png?1547475713391';
 
+var FOLDER_ICON = 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Ficons8-folder-48.png?1547477063203';
+
 const PROGRESS = Object.freeze({
   NOT_STARTED: Symbol(0),
   STARTED: Symbol(1),
@@ -31,51 +33,59 @@ function isProgressStarted(progressStatus) {
 }
 
 function updateProgress(trello, progressStatus) {
-  return {
-      
-        if (isProgressStarted(progressStatus)) {
-          var np = Object.assign({}, {
-            status: PROGRESS.STOPPED,
-            timeSpent: new Date.getTime() - progressStatus.startTime
-          }, progressStatus);
-          
-          trello.set('card', 'shared', 'progressStatus', np);
-        } else {
-          trello.set('card', 'shared', 'progressStatus', {
-            status: PROGRESS.STARTED,
-            startTime: new Date.getTime()
-          });
-        }
-      }
+    if (isProgressStarted(progressStatus)) {
+      var np = Object.assign({}, {
+        status: PROGRESS.STOPPED,
+        timeSpent: new Date.getTime() - progressStatus.startTime
+      }, progressStatus);
+
+      trello.set('card', 'shared', 'progressStatus', np);
+    } else {
+      trello.set('card', 'shared', 'progressStatus', {
+        status: PROGRESS.STARTED,
+        startTime: new Date.getTime()
+      });
     }
 }
 
 function createProgressButton(trello) {
+  console.log('createProgressButton called');
   return trello.get('card', 'shared', 'progressStatus')
   .then(function(progressStatus) {
-     
+    console.log('progressStatus resolved');
+    return {
+      icon: isProgressStarted(progressStatus) ? CHECKMARK_ICON : WIP_ICON,
+      text: isProgressStarted(progressStatus) ? 'Stop progress' : 'Start progress',
+      callback: function(trello) { updateProgress(trello, progressStatus); }
+    }
   })
 }
 
 function createEpicButton(trello) {
+  console.log('createEpicButton called');
   return trello.get('card', 'shared', 'epic')
   .then(function(epic) {
+    console.log('Epic resolved to: ' + epic);
     return {
-      icon: '',
+      icon: FOLDER_ICON,
       text: epic == '_self_' ? 'Is Epic' : epic == '' ? 'No Epic assigned' : 'Epic: ' + epic,
       callback: function(trello) {
-        
+       // Stub 
       }
     }
   })
-    
 }
         
 function buttons(t, options) {
   console.log('card-buttons called!');
-  return [
-      createEstimationButton(t),
-      createProgressButton(t)
-    ];
+  var buttons = [
+    createEstimationButton(t),
+      createProgressButton(t),
+      createEpicButton(t)
+  ];
+  var result =  Promise.resolve()
+  buttons.forEach(button => {
+    result = result.then(() => button(t));
+  });
 }
   
