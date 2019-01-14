@@ -12,26 +12,12 @@ console.log('client.js started');
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
 	'card-buttons': function(t, options){
-    t.get('card', 'shared', 'estimate')
+    console.log('card-buttons called!');
+    return t.get('card', 'shared', 'estimate')
     .then(function(estimate) {
-      console.log('estimation found' + estimate);
-      if (!estimate) {
-        return;
-      }
-      
-      console.log('searching for button');
-      var aTags = document.getElementsByTagName('a');
-      for (var i = 0; i < aTags.length; i++) {
-        console.log('Checking element ' + aTags[i]);
-        if (aTags[i].title && aTags[i].title === 'Estimate time') {
-          aTags[i].title = 'Estimated' + estimate;
-          break;
-        }
-      }
-    });
-    return [{
+      return [{
         icon: BLACK_TIMER_ICON,
-        text: 'Estimate time',
+        text: estimate ? 'Estimation: ' + estimate : 'Estimate time',
         callback: function(t){
           return t.popup({
             title: "Estimation",
@@ -39,6 +25,7 @@ TrelloPowerUp.initialize({
           });
         }
       }];
+    })
 	},
   'card-badges': function(t, options) {
       return t.get('card', 'shared', 'estimate')
@@ -51,16 +38,19 @@ TrelloPowerUp.initialize({
       })
   },
   'card-detail-badges': function(t, options) {
-    return [{
-      title: 'Estimate',
-      color: 'red',
-      text: 'Large',
-      callback: function(t) {
-        return t.popup({
-          title: "Estimation",
-          url: '../estimate.html'
-        });
-      }      
-    }]
+    return t.get('card', 'shared', 'estimate')
+    .then(function(estimate) {
+      return [{
+        title: 'Estimate',
+        color: estimate ? 'blue' : 'red',
+        text: estimate ? estimate : 'No Estimation!',
+        callback: function(t) {
+          return t.popup({
+            title: "Estimation",
+            url: '../estimate.html'
+          });
+        }      
+      }]
+    })
   }  
 });
