@@ -41,5 +41,17 @@ TrelloPowerUp.initialize({
           }
       ]
     })
+  },
+  'board-buttons': function (t, opts) {
+        return t.cards('all')
+        .then(function (cards) {
+            var total = 0;
+            cards.array.forEach(element => {
+                t.get(element.id, 'shared', 'estimate')
+                .then(function(estimate) {
+                    total += estimate;
+                });
+            });
+        });
   }  
 });

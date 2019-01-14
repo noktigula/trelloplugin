@@ -47,10 +47,13 @@ function updateProgress(trello, progressStatus) {
       trello.set('card', 'shared', 'progressStatus', np);
     } else {
       console.log('starting progress');
-      trello.set('card', 'shared', 'progressStatus', {
+      var ps = {
         status: PROGRESS.STARTED,
-        startTime: new Date.getTime()
-      });
+        startTime: Date.now()
+      };
+      console.log(ps);
+      trello.set('card', 'shared', 'progressStatus', ps).then(()=>{console.log('done twice!')});
+      console.log('done!');
     }
 }
 
