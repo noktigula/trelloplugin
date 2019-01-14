@@ -42,10 +42,11 @@ TrelloPowerUp.initialize({
       ]
     })
   },
-  'board-buttons': function (t, opts) {
+  'board-buttons': function (t, options) {
         console.log('board-buttons started!!!');
         return t.cards('all')
         .then(function (cards) {
+            console.log('start
             var total = 0;
             cards.array.forEach(element => {
                 t.get(element.id, 'shared', 'estimate')
@@ -54,8 +55,9 @@ TrelloPowerUp.initialize({
                 });
             });
             return [{
-                text: "Total Est: " + total,
-                condition: always
+                icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
+                text: 'Total Est: ' + total,
+                condition: 'always'
             }]          
         });
   }  
