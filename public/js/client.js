@@ -13,11 +13,11 @@ TrelloPowerUp.initialize({
     console.log('card-buttons called!');
     return [{
       icon: BLACK_TIMER_ICON,
-      text: 'Estimate Size',
+      text: 'Estimate time',
       callback: function(t){
         return t.popup({
           title: "Estimation",
-          url: 'estimate.html'
+          url: '../../estimate.html'
         });
       }
     }];
