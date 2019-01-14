@@ -26,19 +26,51 @@ function createEstimationButton(trello) {
   });
 }
 
+function isProgressStarted(progressStatus) {
+   progressStatus && progressStatus.status === PROGRESS.STARTED 
+}
+
+function updateProgress(trello, progressStatus) {
+  return {
+      
+        if (isProgressStarted(progressStatus)) {
+          var np = Object.assign({}, {
+            status: PROGRESS.STOPPED,
+            timeSpent: new Date.getTime() - progressStatus.startTime
+          }, progressStatus);
+          
+          trello.set('card', 'shared', 'progressStatus', np);
+        } else {
+          trello.set('card', 'shared', 'progressStatus', {
+            status: PROGRESS.STARTED,
+            startTime: new Date.getTime()
+          });
+        }
+      }
+    }
+}
+
 function createProgressButton(trello) {
   return trello.get('card', 'shared', 'progressStatus')
   .then(function(progressStatus) {
+     
+  })
+}
+
+function createEpicButton(trello) {
+  return trello.get('card', 'shared', 'epic')
+  .then(function(epic) {
     return {
-      icon: progressStatus && progressStatus.status === PROGRESS.STARTED ? CHECKMARK_ICON : WIP_ICON,
-      text: progressStatus && progressStatus.status === PROGRESS.STARTED ? 'Stop progress' : 'Start progress',
+      icon: '',
+      text: epic == '_self_' ? 'Is Epic' : epic == '' ? 'No Epic assigned' : 'Epic: ' + epic,
       callback: function(trello) {
         
       }
     }
   })
+    
 }
-
+        
 function buttons(t, options) {
   console.log('card-buttons called!');
   return [
