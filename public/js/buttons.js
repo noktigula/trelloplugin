@@ -76,7 +76,8 @@ function createEpicButton(trello) {
       callback: function(trello) {
         return trello.popup({
           title: "This task is...",
-          url: '../epics.html'
+          url: '../epics.html',
+          height: 185,
         });
       }
     }
