@@ -68,7 +68,7 @@ function createEpicButton(trello) {
     console.log('Epic resolved to: ' + epic);
     return {
       icon: FOLDER_ICON,
-      text: epic == '_self_' ? 'Is Epic' : epic == '' ? 'No Epic assigned' : 'Epic: ' + epic,
+      text: epic == '_self_' ? 'Is Epic' : epic == '' || epic == undefined ? 'No Epic assigned' : 'Epic: ' + epic,
       callback: function(trello) {
        // Stub 
       }
@@ -77,15 +77,15 @@ function createEpicButton(trello) {
 }
         
 function buttons(t, options) {
-  console.log('card-buttons called!');
-  var buttons = [
-    createEstimationButton(t),
-      createProgressButton(t),
-      createEpicButton(t)
-  ];
-  var result =  Promise.resolve()
-  buttons.forEach(button => {
-    result = result.then(() => button(t));
+  return 
+  Promise.all([
+    createEstimationButton(t), 
+    createProgressButton(t), 
+    createEpicButton(t)
+  ])
+  .then(function(values) {
+    console.log(values);
+    return values;
   });
 }
   
