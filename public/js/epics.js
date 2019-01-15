@@ -17,7 +17,10 @@ window.epics.addEventListener('submit', function(event){
 
 t.render(function(){
   //TODO: Load Epics select here
-  console.log(t.cards('all'));
+  console.log(t.cards('all'))
+  .then(function(cards) {
+    
+  });
   
   t.get('card', 'shared', 'epic')
   .then(function(epic){
