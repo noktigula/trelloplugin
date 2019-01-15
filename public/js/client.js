@@ -1,28 +1,13 @@
 /* global TrelloPowerUp */
 var Promise = TrelloPowerUp.Promise;
 
-//var trello = TrelloPowerUp.iframe();
-
-console.log('client.js started');
-
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
-	'card-buttons': buttons,
+  'card-buttons': buttons,
 
   /* Show on card */
-  'card-badges': function(t, options) {
-      return t.get('card', 'shared', 'estimate')
-      .then(function(estimate) {
-        return [
-          /* Estimation */
-          {
-            icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
-            color: estimate ? 'blue' : 'red',
-            text: estimate ? estimate : 'No Estimation!' 
-          }
-        ];
-      })
-  },
+  'card-badges': cardBadges,
+
   'card-detail-badges': function(t, options) {
     return t.get('card', 'shared', 'estimate')
     .then(function(estimate) {
@@ -37,7 +22,7 @@ TrelloPowerUp.initialize({
                 title: "Estimation",
                 url: '../estimate.html'
               });
-            }      
+            }
           }
       ]
     })
@@ -66,5 +51,5 @@ TrelloPowerUp.initialize({
                       }];
                   });
           });
-  }  
+  }
 });
