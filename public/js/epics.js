@@ -17,6 +17,8 @@ window.epics.addEventListener('submit', function(event){
 
 t.render(function(){
   //TODO: Load Epics select here
+  console.log(t.cards('all'));
+  
   t.get('card', 'shared', 'epic')
   .then(function(epic){
     if (epic == '_self_') {
