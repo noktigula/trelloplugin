@@ -50,17 +50,11 @@ function stopProgress(trello, status) {
   trello.set('card', 'shared', 'progressStatus', np);
 }
 
-function updateProgress(trello, progressStatus) {
-  isProgressStarted(progressStatus) 
-    ? stopProgress(trello, progressStatus)
-    : startProgress(trello);
-}
-
 function createProgressButton(trello) {
   return trello.get('card', 'shared', 'progressStatus')
   .then(function(progressStatus) {
     return {
-      icon: isProgressStarted(progressStatus) ? CHECKMARK_ICON : WIP_ICON,
+      icon: CHECKMARK_ICON,
       text: isProgressStarted(progressStatus) ? 'Stop progress' : 'Start progress',
       callback: function(trello) { updateProgress(trello, progressStatus); }
     }
