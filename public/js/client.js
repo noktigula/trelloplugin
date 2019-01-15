@@ -60,6 +60,7 @@ TrelloPowerUp.initialize({
                       var total = estimations.reduce((x, y) => parseFloat(x) + parseFloat(y), 0);
                       return [{
                           icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
+                          class: 'ben-blue',
                           text: 'Board Total: ' + total,
                           condition: 'always'
                       }];

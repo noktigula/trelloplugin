@@ -12,7 +12,9 @@ window.estimate.addEventListener('submit', function(event){
   });
 });
 
-window.addEventListener(ESTIMATION_CHANGED, function() { 
+window.addEventListener(ESTIMATION_CHANGED, function() {
+  var boardSummary = document.querySelectorAll( ".board-header-btn-text" );
+  boardSummary.textContent = boardSummary.textContent.replace(/Board Total: d/
   console.log("Hello World!"); 
 });
 
