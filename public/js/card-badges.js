@@ -28,7 +28,7 @@ function progressBadge(trello, options) {
         return {
             icon: WIP_ICON,
             color: color,
-            text: values[0] ? values[0] : 'No progress'
+            text: values[0] ? 'Spent: ' + values[0] : 'No progress'
         }
     });
 }
