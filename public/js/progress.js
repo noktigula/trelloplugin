@@ -19,6 +19,9 @@ function updateProgress(value) {
 
 window.progress.addEventListener('submit', function(event){
     // Stop the browser trying to submit the form itself.
+    console.log('progress event listener');
+    console.log(event);
+    console.log(event.type);
     event.preventDefault();
     switch(event.type) {
         case 'save': return setProgress(window.updateProgress.value);
