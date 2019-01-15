@@ -2,13 +2,13 @@ var t = TrelloPowerUp.iframe();
 
 function setProgress(value) {
     t.set('card', 'shared', 'progress', value)
-     .then(function() {
-        t.closePopup();
-    });
+        .then(function() {
+            t.closePopup();
+        });
 }
 
 function updateProgress(value) {
-    return t.get('card', 'shared', 'progress', 0)
+    t.get('card', 'shared', 'progress', 0)
         .then(function (progress) {
             t.set('card', 'shared', 'progress', progress+value)
                 .then(function () {
@@ -17,30 +17,32 @@ function updateProgress(value) {
         })
 }
 
-window.progress.addEventListener('submit', function(event){
-    // Stop the browser trying to submit the form itself.
-    console.log('progress event listener');
+document.getElementById('plusfour').addEventListener('click', function(event){
+    updateProgress(4);
+});
+
+document.getElementById('pluseight').addEventListener('click', function(event) {
+    updateProgress(8);
+});
+
+
+window.progress.addEventListener('button', function(event) {
+    console.log('button event');
     console.log(event);
-    console.log(event.type);
-    event.preventDefault();
-    switch(event.type) {
-        case 'save': return setProgress(window.updateProgress.value);
-        case 'plusfour': return updateProgress(4);
-        case 'pluseight': return updateProgress(8);
-    }
+});
+
+window.progress.addEventListener('submit', function(event){
+    return setProgress(window.updateProgress.value);
 });
 
 t.render(function(){
     t.get('card', 'shared', 'progress')
         .then(function(progress){
-            console.log('render progress button');
             if (progress) {
-                window.updateProgress.value = progress;
+                document.getElementById('updateProgress').value = progress;
             }
         })
         .then(function() {
             t.sizeTo('#progress').done();
         })
 });
-
-
