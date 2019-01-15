@@ -72,6 +72,7 @@ function createEpicButton(trello) {
           title: "This task is...",
           url: '../epics.html',
           height: 185,
+          args: {epic: epic},
         });
       }
     }

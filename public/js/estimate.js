@@ -10,6 +10,7 @@ window.estimate.addEventListener('submit', function(event){
 });
 
 t.render(function(){
+  console.log('Render has been called !!!');
   t.get('card', 'shared', 'estimate')
   .then(function(estimate){
     if (estimate) {
