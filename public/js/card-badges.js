@@ -34,7 +34,7 @@ function progressBadge(trello, options) {
 }
 
 function cardBadges(trello, options) {
-    Promise.all([
+    return Promise.all([
         estimationBadge(trello),
         progressBadge(trello)
     ]).then(function (values) {
