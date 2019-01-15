@@ -25,14 +25,8 @@ document.getElementById('pluseight').addEventListener('click', function(event) {
     updateProgress(8);
 });
 
-
-window.progress.addEventListener('button', function(event) {
-    console.log('button event');
-    console.log(event);
-});
-
 window.progress.addEventListener('submit', function(event){
-    return setProgress(window.updateProgress.value);
+    return setProgress(document.getElementById('updateProgress').value);
 });
 
 t.render(function(){
