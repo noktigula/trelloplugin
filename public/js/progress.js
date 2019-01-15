@@ -28,19 +28,19 @@ window.progress.addEventListener('submit', function(event){
         case 'plusfour': return updateProgress(4);
         case 'pluseight': return updateProgress(8);
     }
-
-    return
 });
 
 t.render(function(){
     t.get('card', 'shared', 'progress')
         .then(function(progress){
+            console.log('render progress button');
             if (progress) {
                 window.updateProgress.value = progress;
             }
-        }).then(function(){
-        t.sizeTo('#progress').done();
-    })
+        })
+        .then(function() {
+            t.sizeTo('#progress').done();
+        })
 });
 
 
