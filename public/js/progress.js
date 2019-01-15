@@ -33,13 +33,13 @@ window.progress.addEventListener('submit', function(event){
 });
 
 t.render(function(){
-    t.get('card', 'shared', 'estimate')
-        .then(function(estimate){
-            if (estimate) {
-                window.estimateTime.value = estimate;
+    t.get('card', 'shared', 'progress')
+        .then(function(progress){
+            if (progress) {
+                window.updateProgress.value = progress;
             }
         }).then(function(){
-        t.sizeTo('#estimate').done();
+        t.sizeTo('#progress').done();
     })
 });
 
