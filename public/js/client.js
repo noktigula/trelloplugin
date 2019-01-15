@@ -8,25 +8,8 @@ TrelloPowerUp.initialize({
   /* Show on card */
   'card-badges': cardBadges,
 
-  'card-detail-badges': function(t, options) {
-    return t.get('card', 'shared', 'estimate')
-    .then(function(estimate) {
-      return [
-          /* Estimation */
-          {
-            title: 'Estimate',
-            color: estimate ? 'blue' : 'red',
-            text: estimate ? estimate : 'No Estimation!',
-            callback: function(t) {
-              return t.popup({
-                title: "Estimation",
-                url: '../estimate.html'
-              });
-            }
-          }
-      ]
-    })
-  },
+  'card-detail-badges': cardDetailBadges,
+
   'board-buttons': function (t, options) {
       return t.cards('all')
           .then(function (cards) {
