@@ -1,0 +1,25 @@
+{
+  "name": "btrello",
+  "version": "0.0.1",
+  "description": "A Power-Up skeleton to remix to start building your Power-Up!",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "cors": "^2.8.3"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/btrello"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
