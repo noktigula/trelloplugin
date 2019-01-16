@@ -3,6 +3,7 @@ function estimationBadge(trello) {
     return trello.get('card', 'shared', 'estimate')
     .then(function(estimate) {
         return {
+            title: 'Estimation',
             icon: 'https://cdn.glitch.com/93f19877-502c-49d7-86ca-fa817403bca7%2Fstorypoints-icon.png?1547471374757',
             color: estimate ? 'blue' : 'red',
             text: estimate ? estimate : 'No Estimation!'
@@ -26,6 +27,7 @@ function progressBadge(trello, options) {
         }
 
         return {
+            title: 'Progress',
             icon: WIP_ICON,
             color: color,
             text: values[0] ? 'Spent: ' + values[0] : 'No progress'
