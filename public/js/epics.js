@@ -3,15 +3,22 @@ var t = TrelloPowerUp.iframe();
 window.epics.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
-  
+
   t.get('card', 'shared', 'epic')
   .then(function(epicOldValue) {
     var epicValue = "";
     if (document.querySelector('input[name="epic_type"]:checked')) {
       epicValue = document.querySelector('input[name="epic_type"]:checked').value;
     }
-    
+    console.log('old value: ' + epicOldValue + '; new value: ' + epicValue);
+
+    if (epicValue == 'epic') { // We are making card a part of an epic, we need to store epic id from the select then
+      console.log('Setting a card to new epic: ' + window.epic_id.value);
+      epicValue = window.epic_id.value;
+    }
+
     if (epicValue == epicOldValue) {
+      t.closePopup();
       return;
     }
 
@@ -19,8 +26,6 @@ window.epics.addEventListener('submit', function(event){
     .then(function(){
       t.get('board', 'shared', 'epics')
       .then(function(epicsText) {
-        console.log('epicsText:');
-        console.log(epicsText);
         var epics = epicsText == undefined || epicsText == '' ? [] : JSON.parse(epicsText);
         if (epicOldValue == '_self_') { // Item was demoted to standalone from Epic
           if (! Array.isArray(epics) ) {
@@ -32,32 +37,31 @@ window.epics.addEventListener('submit', function(event){
               }
             }
           }
+          t.set('board', 'shared', 'epics', JSON.stringify(epics))
+          .then(function() {
+            t.closePopup();
+          });
         } else if (epicValue == '_self_') { // Item was promoted from standalone to Epic
           if (!Array.isArray(epics)) {
             epics = [];
           }
-          epics.push({id: t.getContext().card});
-        }
-
-        console.log('Setting epics');
-        console.log(epics);
-        t.set('board', 'shared', 'epics', JSON.stringify(epics))
-        .then(function() {
+          t.card('id', 'name')
+          .then(function(card) {
+            epics.push({id: card.id, name: card.name});
+            t.set('board', 'shared', 'epics', JSON.stringify(epics))
+            .then(function() {
+              t.closePopup();
+            });
+          })
+        } else {
           t.closePopup();
-        });
+        }
       });
     });
   });
 });
 
 t.render(function(){
-  //TODO: Load Epics select here
-  //t.remove('board', 'shared', 'epics');
-  t.get('board', 'shared', 'epics')
-  .then(function(epics){
-    console.log(epics);
-    window.epic_id
-  })
 
   t.get('card', 'shared', 'epic')
   .then(function(epic){
@@ -67,9 +71,27 @@ t.render(function(){
       window.standalone.checked = true;
     } else {
       window.other_epic.checked = true;
-      //TODO: Show proper value in select here
     }
+    t.get('board', 'shared', 'epics')
+    .then(function(epicsText){
+      console.log(epicsText);
+      var epics = epicsText == undefined || epicsText == '' ? [] : JSON.parse(epicsText);
+      if (Array.isArray(epics)) { // as it should be
+          for (var i = 0; i < epics.length; i++) {
+            // TODO: Do not add an epic to the select on itself
+            console.log('Getting card with id ' + epics[i].id);
+            var option = document.createElement('option');
+            option.text = epics[i].name;
+            option.value = epics[i].id;
+            window.epic_id.appendChild(option);
+            if (epics[i].id == epic) {
+              option.selected = true;
+            }
+          }
+      } else {
+        console.warn('board->shared->epics is not an array!');
+      }
+    })
   }).then(function(){
-
   })
 });

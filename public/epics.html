@@ -11,8 +11,10 @@
         <label for="standalone"><input type="radio" name="epic_type" value="" id="standalone"> standalone</label>
         <label for="epic"><input type="radio" name="epic_type" value="_self_" id="epic"> an Epic itself</label>
         <label for="other_epic"><input type="radio" name="epic_type" value="epic" id="other_epic"> a part of an Epic:</label>
-        <select id="epic_id"></select>
-     
+        <select id="epic_id">
+          <option value="">&lt;none&gt;</option>
+        </select>
+
       <button type="submit" class="mod-primary">Save</button>
     </form>
     <script src="./js/epics.js"></script>
