@@ -1,6 +1,10 @@
 /* global TrelloPowerUp */
 var Promise = TrelloPowerUp.Promise;
 
+function sum(x, y) {
+    return parseFloat(x) + parseFloat(y);
+}
+
 TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
   'card-buttons': buttons,
