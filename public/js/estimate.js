@@ -5,7 +5,7 @@ window.estimate.addEventListener('submit', function(event){
   event.preventDefault();
   return t.set('card', 'shared', 'estimate', window.estimateTime.value)
   .then(function(){
-    t.set('board', 'shared', 'random', Math.random()) // To cause refresh of board buttons
+    t.set('board', 'shared', 'random-estimate', Math.random()) // To cause refresh of board buttons
     .then(function(){
       t.closePopup();
     });
