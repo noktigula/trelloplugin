@@ -1,7 +1,5 @@
 var t = TrelloPowerUp.iframe();
 
-var ESTIMATION_CHANGED = "estimationChanged";
-
 window.estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
@@ -10,14 +8,6 @@ window.estimate.addEventListener('submit', function(event){
     fireEstChangeEvent();
     t.closePopup();
   });
-});
-
-window.addEventListener(ESTIMATION_CHANGED, function() {
-  console.log("Hello World!"); 
-  var boardSummary = document.querySelectorAll( ".board-header-btn-text" );
-  
-  //boardSummary.textContent = boardSummary.textContent.replace(/Board Total: \d+.{0,1}\d*/, "Hello World!");
-  
 });
 
 t.render(function(){
@@ -30,13 +20,6 @@ t.render(function(){
     t.sizeTo('#estimate').done();
   })
 });
-
-function fireEstChangeEvent() {
-    var event = document.createEvent("HTMLEvents");
-    event.initEvent(ESTIMATION_CHANGED, true, true);
-    event.eventName = ESTIMATION_CHANGED;
-    window.dispatchEvent(event);  
-}
 
 
 
