@@ -3,7 +3,10 @@ var t = TrelloPowerUp.iframe();
 function setProgress(value) {
     t.set('card', 'shared', 'progress', value)
         .then(function() {
-            t.closePopup();
+            t.set('board', 'shared', 'random-progress', Math.random()) // To cause refresh of board buttons
+            .then(function(){
+              t.closePopup();
+            });
         });
 }
 
